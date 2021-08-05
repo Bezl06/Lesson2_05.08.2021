@@ -17,24 +17,19 @@ namespace ConsoleApp
             float operand2 = int.Parse(Console.ReadLine());
             System.Console.WriteLine($"Операнд 1 : {operand1}\nОперанд 2 : {operand2}\nВыберите операцию:\n'+' '-' '*' '/'");
             string sign = Console.ReadLine();
-            switch (sign)
+            if (sign == "/" && operand2 == 0)
             {
-                case "+": operand1 += operand2; break;
-                case "-": operand1 -= operand2; break;
-                case "*": operand1 *= operand2; break;
-                case "/":
-                    {
-                        if (operand2 == 0)
-                        {
-                            System.Console.WriteLine("Делить на ноль нельзя!");
-                            return;
-                        }
-                        else
-                            operand1 /= operand2; break;
-                    }
-                default: System.Console.WriteLine("Неправильно введенные данные!"); return;
+                System.Console.WriteLine("На ноль делить нельзя!"); return;
             }
-            System.Console.WriteLine($"Результат : {operand1}\n");
+            float result = sign switch
+            {
+                "+" => operand1 + operand2,
+                "=" => operand1 - operand2,
+                "*" => operand1 * operand2,
+                "/" => operand1 / operand2,
+                _ => throw new ArgumentException("Недопустимая операция!!!")
+            };
+            System.Console.WriteLine($"{operand1} {sign} {operand2} = {result}");
 
             //Задача №4
             System.Console.WriteLine("Введите число : ");
